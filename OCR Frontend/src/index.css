@@ -1,0 +1,13 @@
+@import url('https://googleapis.com');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Geist", sans-serif;
+}
+
+/* globals.css */
+.no-scrollbar-arrows::-webkit-scrollbar-button {
+  display: none;
+  height: 0;
+  width: 0;
+}
