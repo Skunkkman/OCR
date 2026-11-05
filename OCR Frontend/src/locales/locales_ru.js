@@ -9,6 +9,7 @@ const ruTranslations = {
     "ChatBox": {
         "Select Model": "Выбрать модель",
         "AIDisclaimer": "ИИ может ошибаться. Проверяйте важную информацию.",
+        "Message": "Сообщение",
     }
 };
 

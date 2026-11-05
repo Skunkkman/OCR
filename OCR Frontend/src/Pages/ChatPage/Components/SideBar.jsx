@@ -8,7 +8,7 @@ import { updateLanguageFromCookie } from '../../../../i18n';
 import Dropdown from '../../../Components/Buttons/Dropdown';
 import { FaPlus } from "react-icons/fa";
 
-export default function SideBar({ isOpen, setIsOpen }) {
+export default function SideBar({ isOpen, setIsOpen, onNewChat }) {
     const { t } = useTranslation();
 
     const cookies = new Cookies();
@@ -39,7 +39,7 @@ export default function SideBar({ isOpen, setIsOpen }) {
                                     button={
                                         <button
                                             className={`h-6 mb-1 transition-transform duration-200 ease-out bg-center bg-cover rounded-sm cursor-pointer hover:scale-110 active:scale-95 ${currentLanguage === 'en' ? 'aspect-[2_/_1]' : 'aspect-[3_/_2]'}`}
-                                            title='Language Selection Dropdown Button'
+                                            title='Language Selection Dropdown'
                                             style={{ backgroundImage: `url(/Flag_${currentLanguage}.svg)` }}
                                         >
                                         </button>
@@ -61,7 +61,9 @@ export default function SideBar({ isOpen, setIsOpen }) {
                                 />
                             </div>
                             <div className="flex flex-row justify-center mt-4">
-                                <button className="w-9/10 p-2 h-full bg-gray-500 hover:bg-gray-600 active:scale-98 rounded-3xl text-white text-md cursor-pointer font-semibold shadow-sm hover:shadow-md transition-all duration-200 ease-in-out flex items-center justify-center gap-2">
+                                <button className="w-9/10 p-2 h-full bg-gray-500 hover:bg-gray-600 active:scale-98 rounded-3xl text-white text-md cursor-pointer font-semibold shadow-sm hover:shadow-md transition-all duration-200 ease-in-out flex items-center justify-center gap-2"
+                                    onClick={onNewChat}
+                                >
                                     <FaPlus size={14} />
                                     <span>{t("SideBar.NewChat")}</span>
                                 </button>

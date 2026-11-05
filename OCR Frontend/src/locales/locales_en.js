@@ -8,7 +8,8 @@ const enTranslations = {
     },
     "ChatBox": {
         "Select Model": "Select Model",
-        "AIDisclaimer": "AI can make mistakes. Check important info."
+        "AIDisclaimer": "AI can make mistakes. Check important info.",
+        "Message": "Message",
     }
 };
 

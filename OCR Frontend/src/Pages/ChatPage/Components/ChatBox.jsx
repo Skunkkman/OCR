@@ -3,7 +3,7 @@ import { FaPaperclip, FaArrowRight, FaChevronDown } from "react-icons/fa";
 import Dropdown from "../../../Components/Buttons/Dropdown";
 import { useTranslation } from "react-i18next";
 
-export default function ChatBox({ messages }) {
+export default function ChatBox({ onSend }) {
     const { t } = useTranslation();
 
     const MODELS = [{ label: "Select Model", onClick: () => { } }];
@@ -17,9 +17,10 @@ export default function ChatBox({ messages }) {
 
     const handleSendMessage = () => {
         if (!input.trim()) return;
-        // TODO: Have this update the message state and add the users message with a test response
+        onSend(input);
         setInput("");
     };
+
 
     const handleKeyDown = (e) => {
         if (e.key === "Enter" && !e.shiftKey) {
@@ -30,17 +31,19 @@ export default function ChatBox({ messages }) {
 
     return (
         <div className="w-full flex flex-col gap-2">
-            {/* The card */}
-            <div className="relative w-full h-full bg-gray-400 rounded-2xl shadow-gray-500 shadow-sm p-2">
+            {/* Chatbox Card */}
+            <div className="relative w-full h-full bg-gray-400 rounded-2xl shadow-gray-500 shadow-sm p-2 flex flex-col gap-1">
                 <textarea
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    className="w-full h-full bg-transparent text-white placeholder-gray-200 resize-none outline-none px-2 py-1 pr-20 text-md"
-                    placeholder="Message"
+                    className="w-full flex-1 min-h-0 bg-transparent text-white placeholder-gray-200 resize-none outline-none px-2 py-1 text-md"
+                    placeholder={t("ChatBox.Message")}
                 />
-                {/* Model Selection */}
-                <div className="absolute bottom-2 left-2">
+
+                {/* Controls row */}
+                <div className="flex flex-row items-center justify-between gap-2">
+                    {/* Model Selection */}
                     <Dropdown
                         button={
                             <button
@@ -55,31 +58,31 @@ export default function ChatBox({ messages }) {
                         dropdownItems={modelItems}
                         settings={{ dropdownPosition: "left", dropdownmt: "mb-2" }}
                     />
-                </div>
 
-                {/* Buttons */}
-                <div className="absolute bottom-2 right-2 flex flex-row gap-1">
-                    <button
-                        type="button"
-                        title="Attach file"
-                        className="flex items-center justify-center w-7 h-7 rounded-full text-gray-600 hover:bg-gray-500 hover:text-gray-200 active:scale-95 transition-all duration-150 cursor-pointer"
-                    >
-                        <FaPaperclip size={16} />
-                    </button>
-                    <button
-                        type="button"
-                        title="Send"
-                        onClick={handleSendMessage}
-                        className="flex items-center justify-center w-7 h-7 rounded-full text-gray-600 hover:bg-gray-500 hover:text-gray-200 active:scale-95 transition-all duration-150 cursor-pointer"
-                    >
-                        <FaArrowRight size={16} />
-                    </button>
+                    {/* Buttons */}
+                    <div className="flex flex-row gap-1">
+                        <button
+                            type="button"
+                            title="Attach file"
+                            className="flex items-center justify-center w-7 h-7 rounded-full text-gray-600 hover:bg-gray-500 hover:text-gray-200 active:scale-95 transition-all duration-150 cursor-pointer"
+                        >
+                            <FaPaperclip size={16} />
+                        </button>
+                        <button
+                            type="button"
+                            title="Send"
+                            onClick={handleSendMessage}
+                            className="flex items-center justify-center w-7 h-7 rounded-full text-gray-600 hover:bg-gray-500 hover:text-gray-200 active:scale-95 transition-all duration-150 cursor-pointer"
+                        >
+                            <FaArrowRight size={16} />
+                        </button>
+                    </div>
                 </div>
             </div>
 
             <span className="w-full flex justify-center text-xs text-gray-600">
                 {t("ChatBox.AIDisclaimer")}
             </span>
-        </div >
+        </div>
     );
 }
