@@ -3,8 +3,10 @@ import ChatPage from './Pages/ChatPage/ChatPage';
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <ChatPage />
-    </BrowserRouter>
+    <div className="overflow-x-hidden">
+      <BrowserRouter>
+        <ChatPage />
+      </BrowserRouter>
+    </div>
   );
 }

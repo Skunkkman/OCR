@@ -3,27 +3,39 @@ import { FaPaperclip, FaArrowRight, FaChevronDown } from "react-icons/fa";
 import Dropdown from "../../../Components/Buttons/Dropdown";
 import { useTranslation } from "react-i18next";
 
-export default function ChatBox({ isSideBarOpen }) {
+export default function ChatBox({ messages }) {
     const { t } = useTranslation();
 
     const MODELS = [{ label: "Select Model", onClick: () => { } }];
     const [selectedModel, setSelectedModel] = useState(MODELS[0]);
+    const [input, setInput] = useState("");
 
     const modelItems = MODELS.map((m) => ({
         content: <span className="text-sm text-gray-700">{t(`ChatBox.${m.label}`)}</span>,
         onClick: () => setSelectedModel(m.label),
     }));
 
+    const handleSendMessage = () => {
+        if (!input.trim()) return;
+        // TODO: Have this update the message state and add the users message with a test response
+        setInput("");
+    };
+
+    const handleKeyDown = (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            handleSendMessage();
+        }
+    };
+
     return (
-        <div
-            className={`
-                w-screen h-screen flex items-center justify-center
-                transition-[padding] duration-300 ease-in-out
-                ${isSideBarOpen ? "pl-[70vw] md:pl-[17.5vw]" : "pl-0"}
-            `}
-        >
-            <div className="relative w-[90vw] md:w-[50vw] h-[10vh] md:h-[15vh] bg-gray-400 rounded-2xl shadow-gray-500 shadow-sm p-2">
+        <div className="w-full flex flex-col gap-2">
+            {/* The card */}
+            <div className="relative w-full h-full bg-gray-400 rounded-2xl shadow-gray-500 shadow-sm p-2">
                 <textarea
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={handleKeyDown}
                     className="w-full h-full bg-transparent text-white placeholder-gray-200 resize-none outline-none px-2 py-1 pr-20 text-md"
                     placeholder="Message"
                 />
@@ -57,12 +69,17 @@ export default function ChatBox({ isSideBarOpen }) {
                     <button
                         type="button"
                         title="Send"
+                        onClick={handleSendMessage}
                         className="flex items-center justify-center w-7 h-7 rounded-full text-gray-600 hover:bg-gray-500 hover:text-gray-200 active:scale-95 transition-all duration-150 cursor-pointer"
                     >
                         <FaArrowRight size={16} />
                     </button>
                 </div>
             </div>
-        </div>
+
+            <span className="w-full flex justify-center text-xs text-gray-600">
+                {t("ChatBox.AIDisclaimer")}
+            </span>
+        </div >
     );
 }

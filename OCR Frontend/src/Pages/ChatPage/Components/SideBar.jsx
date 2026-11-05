@@ -69,16 +69,16 @@ export default function SideBar({ isOpen, setIsOpen }) {
                             <div className="flex flex-col h-full w-full mt-4 min-h-0">
                                 <div className="px-4 no-scrollbar-arrows scrollbar-thumb-gray-600 scrollbar-track-transparent flex flex-col w-full flex-1 min-h-0 overflow-y-auto">
                                     <span className='ml-2 text-xs font-semibold mt-2'>{t("SideBar.Today")}</span>
-                                    {Array.from({ length: 2 }).map((_, i) => (
-                                        <SideBarChatRow key={i} chat={{ "name": "Test_Chat" }} />
+                                    {Array.from({ length: 2 }).map((_, key) => (
+                                        <SideBarChatRow key={key} chat={{ "name": "Test_Chat" }} />
                                     ))}
                                     <span className='ml-2 text-xs font-semibold mt-2'>{t("SideBar.7Days")}</span>
-                                    {Array.from({ length: 10 }).map((_, i) => (
-                                        <SideBarChatRow key={i} chat={{ "name": "Test_Chat" }} />
+                                    {Array.from({ length: 10 }).map((_, key) => (
+                                        <SideBarChatRow key={key} chat={{ "name": "Test_Chat" }} />
                                     ))}
                                     <span className='ml-2 text-xs font-semibold mt-2'>{t("SideBar.30Days")}</span>
-                                    {Array.from({ length: 25 }).map((_, i) => (
-                                        <SideBarChatRow key={i} chat={{ "name": "Test_Chat" }} />
+                                    {Array.from({ length: 25 }).map((_, key) => (
+                                        <SideBarChatRow key={key} chat={{ "name": "Test_Chat" }} />
                                     ))}
                                 </div>
                             </div>
