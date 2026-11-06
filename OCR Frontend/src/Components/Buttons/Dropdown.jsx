@@ -79,7 +79,7 @@ export default function Dropdown({
                         exit="hidden"
                         style={{ originY: 0 }}
                         className={`
-                            absolute top-full ${settings.dropdownmt ?? "mt-2"} bg-gray-400 w-max rounded-lg shadow-lg z-50 border border-gray-300
+                            absolute top-full ${settings.dropdownmt ?? "mt-2"} bg-gray-300 w-max rounded-lg shadow-lg z-50 border border-gray-300
                             min-w-10/10
                             ${settings.dropdownPosition === 'left' ? 'left-0' : 'right-0'}
                         `}
@@ -91,7 +91,7 @@ export default function Dropdown({
                         )}
                         {dropdownItems?.map((item, key) => (
                             <div
-                                className="flex items-center gap-3 px-4 py-2 text-lg hover:bg-gray-500 cursor-pointer transition-colors"
+                                className="flex items-center gap-3 px-4 py-2 text-lg hover:bg-gray-400 cursor-pointer transition-colors"
                                 key={key}
                                 onClick={(e) => {
                                     item.onClick(e);

@@ -1,0 +1,1 @@
+export const PRIMARY_BUTTON_STYLE = `p-2 bg-gray-500 hover:bg-gray-600 active:scale-98 rounded-3xl text-white text-md cursor-pointer font-semibold shadow-sm hover:shadow-md transition-all duration-200 ease-in-out flex items-center justify-center gap-2`

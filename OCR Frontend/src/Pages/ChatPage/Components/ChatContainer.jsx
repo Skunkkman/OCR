@@ -13,11 +13,12 @@ export default function ChatContainer({ isSideBarOpen, messages, onSend, chatTit
                 transition={{ duration: 0.3, ease: "easeInOut" }}
                 className="pointer-events-auto flex flex-col w-full max-w-3xl px-4 min-h-0 h-full py-4"
             >
+                {/* Chat title */}
                 <AnimatePresence initial={false}>
-                    {hasMessages ? (
+                    {hasMessages && (
                         <motion.header
                             key="chat-header"
-                            initial={{ opacity: 0, }}
+                            initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.3, ease: "easeOut" }}
@@ -30,22 +31,10 @@ export default function ChatContainer({ isSideBarOpen, messages, onSend, chatTit
                                 {chatTitle}
                             </h1>
                         </motion.header>
-                    ) : (
-                        <motion.header
-                            key="logo-title"
-                            initial={{ opacity: 0, }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.3, ease: "easeOut" }}
-                            className="flex h-full flex-col items-center justify-center"
-                        >
-                            <div className="flex flex-row">
-                                <img src="/Logo_512x512.png" className="w-16 aspect-square self-center" />
-                                <div className="self-center text-gray-700 font-bold text-lg">Anima OCR</div>
-                            </div>
-                        </motion.header>)}
+                    )}
                 </AnimatePresence>
 
+                {/* Message Column */}
                 <div className="w-full flex flex-col gap-y-4 mb-2 flex-1 min-h-0 overflow-y-auto mt-16">
                     <AnimatePresence initial={false}>
                         {messages.map((message) => (
@@ -63,14 +52,35 @@ export default function ChatContainer({ isSideBarOpen, messages, onSend, chatTit
                     </AnimatePresence>
                 </div>
 
-                <motion.div
-                    initial={false}
-                    animate={{ y: hasMessages ? 0 : "-35vh" }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="shrink-0"
-                >
-                    <ChatBox onSend={onSend} />
-                </motion.div>
+                <div className="shrink-0 relative">
+                    {/* Logo/Name */}
+                    <AnimatePresence initial={false}>
+                        {!hasMessages && (
+                            <motion.div
+                                key="logo-title"
+                                style={{ y: "-35vh" }}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.3, ease: "easeOut" }}
+                                className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 flex flex-row pointer-events-none"
+                            >
+                                <img src="/Logo_512x512.png" className="w-16 aspect-square self-center" />
+                                <h1 className="self-center text-gray-700 font-bold text-lg">Anima OCR</h1>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+
+                    {/* Chatbox */}
+                    <motion.div
+                        initial={false}
+                        animate={{ y: hasMessages ? 0 : "-35vh" }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="w-full"
+                    >
+                        <ChatBox onSend={onSend} />
+                    </motion.div>
+                </div>
             </motion.div>
         </div>
     );

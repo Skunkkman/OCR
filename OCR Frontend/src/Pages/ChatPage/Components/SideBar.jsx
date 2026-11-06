@@ -7,6 +7,7 @@ import Cookies from 'universal-cookie';
 import { updateLanguageFromCookie } from '../../../../i18n';
 import Dropdown from '../../../Components/Buttons/Dropdown';
 import { FaPlus } from "react-icons/fa";
+import { PRIMARY_BUTTON_STYLE } from '../../../Constants/ButtonStyles';
 
 export default function SideBar({ isOpen, setIsOpen, onNewChat, onLoadChat }) {
     const { t } = useTranslation();
@@ -35,10 +36,11 @@ export default function SideBar({ isOpen, setIsOpen, onNewChat, onLoadChat }) {
                     >
                         <div className="flex flex-col h-full w-full">
                             <div className="flex flex-row justify-between items-center p-2 text-md text-gray-600">
+                                {/* Language dropdown */}
                                 <Dropdown
                                     button={
                                         <button
-                                            className={`h-6 mb-1 transition-transform duration-200 ease-out bg-center bg-cover rounded-sm cursor-pointer hover:scale-110 active:scale-95 ${currentLanguage === 'en' ? 'aspect-[2_/_1]' : 'aspect-[3_/_2]'}`}
+                                            className={`h-7 mb-1 transition-transform duration-200 ease-out bg-center bg-cover rounded-md  cursor-pointer hover:scale-110 active:scale-95 aspect-[3_/_2]`}
                                             title='Language Selection Dropdown'
                                             style={{ backgroundImage: `url(/Flag_${currentLanguage}.svg)` }}
                                         >
@@ -54,33 +56,36 @@ export default function SideBar({ isOpen, setIsOpen, onNewChat, onLoadChat }) {
                                         dropdownmt: 'mt-2',
                                     }}
                                 />
+                                {/* Close sidebar button*/}
                                 <FaChevronLeft
                                     onClick={() => setIsOpen(false)}
                                     className="cursor-pointer rounded-full p-1 transition-colors duration-200 hover:bg-gray-500 hover:text-gray-200"
                                     size={28}
                                 />
                             </div>
-                            <div className="flex flex-row justify-center mt-4">
-                                <button className="w-9/10 p-2 h-full bg-gray-500 hover:bg-gray-600 active:scale-98 rounded-3xl text-white text-md cursor-pointer font-semibold shadow-sm hover:shadow-md transition-all duration-200 ease-in-out flex items-center justify-center gap-2"
+                            <div className="flex flex-row justify-center mt-2">
+                                {/* New chat button */}
+                                <button className={`${PRIMARY_BUTTON_STYLE} w-9/10 h-full`}
                                     onClick={onNewChat}
                                 >
                                     <FaPlus size={14} />
                                     <span>{t("SideBar.NewChat")}</span>
                                 </button>
                             </div>
+                            {/* Chat row container */}
                             <div className="flex flex-col h-full w-full mt-4 min-h-0">
                                 <div className="px-4 no-scrollbar-arrows scrollbar-thumb-gray-600 scrollbar-track-transparent flex flex-col w-full flex-1 min-h-0 overflow-y-auto">
                                     <span className='ml-2 text-xs font-semibold mt-2'>{t("SideBar.Today")}</span>
                                     {Array.from({ length: 2 }).map((_, key) => (
-                                        <SideBarChatRow key={key} chat={{ "name": "Test Chat" }} onClick={onLoadChat} />
+                                        <SideBarChatRow key={key} chat={{ name: "Test Chat" }} onClick={onLoadChat} />
                                     ))}
                                     <span className='ml-2 text-xs font-semibold mt-2'>{t("SideBar.7Days")}</span>
                                     {Array.from({ length: 10 }).map((_, key) => (
-                                        <SideBarChatRow key={key} chat={{ "name": "Test Chat" }} onClick={onLoadChat} />
+                                        <SideBarChatRow key={key} chat={{ name: "Test Chat" }} onClick={onLoadChat} />
                                     ))}
                                     <span className='ml-2 text-xs font-semibold mt-2'>{t("SideBar.30Days")}</span>
                                     {Array.from({ length: 25 }).map((_, key) => (
-                                        <SideBarChatRow key={key} chat={{ "name": "Test Chat" }} onClick={onLoadChat} />
+                                        <SideBarChatRow key={key} chat={{ name: "Test Chat" }} onClick={onLoadChat} />
                                     ))}
                                 </div>
                             </div>
