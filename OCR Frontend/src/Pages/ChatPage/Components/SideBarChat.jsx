@@ -1,6 +1,8 @@
-export default function SideBarChatRow({ chat }) {
+export default function SideBarChatRow({ chat, onClick }) {
     return (
-        <div className="flex w-full mx-auto bg-gray-none hover:bg-gray-500 rounded-xl text-sm text-black hover:text-white px-2 py-2 cursor-pointer duration-100 transition-all">
+        <div className="flex w-full mx-auto bg-gray-none hover:bg-gray-500 rounded-xl text-sm text-black hover:text-white px-2 py-2 cursor-pointer duration-100 transition-all"
+            onClick={onClick}
+        >
             <span>{chat.name}</span>
         </div>
     );

@@ -8,7 +8,7 @@ import { updateLanguageFromCookie } from '../../../../i18n';
 import Dropdown from '../../../Components/Buttons/Dropdown';
 import { FaPlus } from "react-icons/fa";
 
-export default function SideBar({ isOpen, setIsOpen, onNewChat }) {
+export default function SideBar({ isOpen, setIsOpen, onNewChat, onLoadChat }) {
     const { t } = useTranslation();
 
     const cookies = new Cookies();
@@ -72,15 +72,15 @@ export default function SideBar({ isOpen, setIsOpen, onNewChat }) {
                                 <div className="px-4 no-scrollbar-arrows scrollbar-thumb-gray-600 scrollbar-track-transparent flex flex-col w-full flex-1 min-h-0 overflow-y-auto">
                                     <span className='ml-2 text-xs font-semibold mt-2'>{t("SideBar.Today")}</span>
                                     {Array.from({ length: 2 }).map((_, key) => (
-                                        <SideBarChatRow key={key} chat={{ "name": "Test_Chat" }} />
+                                        <SideBarChatRow key={key} chat={{ "name": "Test Chat" }} onClick={onLoadChat} />
                                     ))}
                                     <span className='ml-2 text-xs font-semibold mt-2'>{t("SideBar.7Days")}</span>
                                     {Array.from({ length: 10 }).map((_, key) => (
-                                        <SideBarChatRow key={key} chat={{ "name": "Test_Chat" }} />
+                                        <SideBarChatRow key={key} chat={{ "name": "Test Chat" }} onClick={onLoadChat} />
                                     ))}
                                     <span className='ml-2 text-xs font-semibold mt-2'>{t("SideBar.30Days")}</span>
                                     {Array.from({ length: 25 }).map((_, key) => (
-                                        <SideBarChatRow key={key} chat={{ "name": "Test_Chat" }} />
+                                        <SideBarChatRow key={key} chat={{ "name": "Test Chat" }} onClick={onLoadChat} />
                                     ))}
                                 </div>
                             </div>

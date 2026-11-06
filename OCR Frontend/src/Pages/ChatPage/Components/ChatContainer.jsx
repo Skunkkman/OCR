@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import ChatBox from "./ChatBox";
 import ChatMessage from "./ChatMessage";
 
-export default function ChatContainer({ isSideBarOpen, messages, onSend, chatName = "Test_Chat" }) {
+export default function ChatContainer({ isSideBarOpen, messages, onSend, chatTitle }) {
     const hasMessages = messages.length > 0;
 
     return (
@@ -14,7 +14,7 @@ export default function ChatContainer({ isSideBarOpen, messages, onSend, chatNam
                 className="pointer-events-auto flex flex-col w-full max-w-3xl px-4 min-h-0 h-full py-4"
             >
                 <AnimatePresence initial={false}>
-                    {hasMessages && (
+                    {hasMessages ? (
                         <motion.header
                             key="chat-header"
                             initial={{ opacity: 0, }}
@@ -25,12 +25,25 @@ export default function ChatContainer({ isSideBarOpen, messages, onSend, chatNam
                         >
                             <h1
                                 className="max-w-full truncate text-sm font-semibold text-gray-600 tracking-wide"
-                                title={chatName}
+                                title={chatTitle}
                             >
-                                {chatName}
+                                {chatTitle}
                             </h1>
                         </motion.header>
-                    )}
+                    ) : (
+                        <motion.header
+                            key="logo-title"
+                            initial={{ opacity: 0, }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                            className="flex h-full flex-col items-center justify-center"
+                        >
+                            <div className="flex flex-row">
+                                <img src="/Logo_512x512.png" className="w-16 aspect-square self-center" />
+                                <div className="self-center text-gray-700 font-bold text-lg">Anima OCR</div>
+                            </div>
+                        </motion.header>)}
                 </AnimatePresence>
 
                 <div className="w-full flex flex-col gap-y-4 mb-2 flex-1 min-h-0 overflow-y-auto mt-16">
